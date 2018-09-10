@@ -100,6 +100,11 @@ jsonContent:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@caren.github.com:profileCaren/profileCaren.github.io.git
+
+  # 正常deploy
+  # repo: git@caren.github.com:profileCaren/profileCaren.github.io.git
+
+  # CI deploy
+  repo: https://gh_token@github.com/profileCaren/profileCaren.github.io.git
   branch: master
   message: 

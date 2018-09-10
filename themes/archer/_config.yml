@@ -10,7 +10,7 @@ social:
   email: caren_szu@foxmail.com
   github: https://github.com/profileCaren
   # wechat and qq should be a path of qr-code image
-  wechat: /assets/example_qr.png
+  wechat: /assets/wechat.jpg
   qq: 
   telegram: 
   weibo: 
@@ -35,16 +35,13 @@ friends:
   friendC: 
 about:
   enable: true
-  image: '/intro/about-bg.jpg'
+  # image: '/intro/about-bg.jpg'
 
 # ========== Site ========== #
 # title of the site (good for SEO)
 SEO_title: 赖嘉文的个人网站- Caren Lai's personal Website
 # keywords for site (good for SEO)
 SEO_keywords:
-  - hexo
-  - 'hexo-theme'
-  - 'hexo-blog'
   - '赖嘉文'
   - 'Caren Lai'
 # main title shown in header image
@@ -74,15 +71,19 @@ algolia_search:
 comment:
   # Livere  site: https://livere.com/
   livere_uid: 
+
   # Disqus  site: https://disqus.com/
-  disqus_shortname: 
+  disqus_shortname:
+
   # Gitment  site: https://github.com/imsun/gitment
   gitment_owner: profileCaren
   gitment_repo: blog-comments
   gitment_client_id: 0ea94fa2e3ce6dfdc2b3
   gitment_client_secret: 14fa32cf50024c39472fb07574f05857f384203c
+
   # Youyan  site: http://www.uyan.cc/
   youyan_uid: 
+
   # Valine  site: https://valine.js.org/
   valine_appId: 
   valine_appKey: 
@@ -114,7 +115,7 @@ reading_info: true
 # intro height (the default is 50 percents of the screen, you can input other number)
 index_intro_height: 50
 post_intro_height: 50
-about_intro_height: 50
+about_intro_height: 30
 # copyright
 copyright:
   enable: true
