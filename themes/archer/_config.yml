@@ -1,14 +1,14 @@
 # ========== Profile ========== #
 # avatar
-avatar: /avatar/Misaka.jpg
+avatar: /avatar/skateboard.jpg
 # author name
-author: fi3ework
+author: 嘉文
 # signature
-signature: witness me
+signature: Make good results, if the stupid world cares only results.
 # SNS (you can custom the order)
 social:
-  email: 12345@qq.com
-  github: //github.com/fi3ework
+  email: caren_szu@foxmail.com
+  github: https://github.com/profileCaren
   # wechat and qq should be a path of qr-code image
   wechat: /assets/example_qr.png
   qq: 
@@ -17,7 +17,7 @@ social:
   zhihu: 
   douban: 
   facebook: 
-  twitter: 
+  twitter: https://twitter.com/profileCaren
   instagram: 
   stack-overflow: 
   segmentFault: 
@@ -31,7 +31,7 @@ social:
 # friends
 friends:
   friendA: //www.baidu.com
-  friendB: //www.google.com
+  Google: //www.google.com
   friendC: 
 about:
   enable: true
@@ -39,16 +39,18 @@ about:
 
 # ========== Site ========== #
 # title of the site (good for SEO)
-SEO_title: fi3ework's Studio
+SEO_title: 赖嘉文的个人网站- Caren Lai's personal Website
 # keywords for site (good for SEO)
 SEO_keywords:
   - hexo
   - 'hexo-theme'
   - 'hexo-blog'
+  - '赖嘉文'
+  - 'Caren Lai'
 # main title shown in header image
-main_title: fi3ework's Studio.
+main_title: 嘉文的个人网站
 # subtitle
-subtitle: it's better to burn out than to fade away
+subtitle: Make good results, if the stupid world cares only results.
 # site haeder image
 site_header_image: '/intro/index-bg.jpg'
 # post haeder image
@@ -75,10 +77,10 @@ comment:
   # Disqus  site: https://disqus.com/
   disqus_shortname: 
   # Gitment  site: https://github.com/imsun/gitment
-  gitment_owner: 
-  gitment_repo: 
-  gitment_client_id: 
-  gitment_client_secret: 
+  gitment_owner: profileCaren
+  gitment_repo: https://github.com/profileCaren/profileCaren.github.io
+  gitment_client_id: 0ea94fa2e3ce6dfdc2b3
+  gitment_client_secret: 14fa32cf50024c39472fb07574f05857f384203c
   # Youyan  site: http://www.uyan.cc/
   youyan_uid: 
   # Valine  site: https://valine.js.org/
