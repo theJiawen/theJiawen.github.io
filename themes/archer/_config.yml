@@ -97,9 +97,9 @@ busuanzi_pv_or_uv: 'pv'
 # custom analytic slogan, '${count}' is the analytic number, DO NOT modify it.
 busuanzi_slug: 'PV: ${count} :)'
 # Baidu analytics
-baidu_analytics: 
+baidu_analytics: 612abc19987eb353274e306514a41f30
 # Google analytics
-google_analytics: 
+google_analytics: UA-125563981-1
 # CNZZ analytics
 CNZZ_analytics: 
 
