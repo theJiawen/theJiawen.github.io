@@ -105,6 +105,6 @@ deploy:
   # repo: git@caren.github.com:profileCaren/profileCaren.github.io.git
 
   # CI deploy
-  repo: https://gh_token@github.com:profileCaren/profileCaren.github.io.git
+  repo: https://gh_token@github.com/profileCaren/profileCaren.github.io.git
   branch: master
   message: 
