@@ -1,6 +1,7 @@
 ---
 title: 代理模式-设计模式系列(二)
 date: 2018-10-25 16:36:06
+updated: 2018-10-26 18:25:06
 tags: [JavaScript设计模式, 读书笔记]
 abstract: 本文通过多个例子介绍代理模式。代理模式有多种，我们主要介绍在 JavaScript 中常用的两种，虚拟代理和缓存代理。
 categories: 

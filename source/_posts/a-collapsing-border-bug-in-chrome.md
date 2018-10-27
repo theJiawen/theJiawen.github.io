@@ -1,7 +1,11 @@
 ---
-title: chrome中<td>的 border collapse bug
+title: Chrome 中 table 布局的的重叠边框 bug
 date: 2018-10-22 17:53:30
+updated: 2018-10-22 17:53:30
 tags: [Chrome, bug, CSS]
+categories: 
+- 前端
+  - CSS
 ---
 
 今天在实现一个表格布局的时候遭遇了 Chrome 的一个 bug。没错，这次不是我们的问题，是 [chrome 的问题](https://bugs.chromium.org/p/chromium/issues/detail?id=356132)。
@@ -50,3 +54,8 @@ option 2 绿色的 `border-bottom` "延伸"到了 option3 下面去了。同样�
 上面的解决方案使用了`cellspacing="0"`这个属性，但出于好奇我搜了一下`cellspacing`，想知道它的默认值，而后发现这个属性已经不被推荐使用了:
 ![](https://user-gold-cdn.xitu.io/2018/10/24/166a572b342de7a5?w=763&h=280&f=png&s=59897)
 应该在 CSS 中使用 `border-spacing: 0`
+
+## 后记
+
+我刚看到这个现象的时候，在一瞬间直觉就告诉我这是 Chrome 的 bug 了。这个直觉从何而来呢？ 从张鑫旭大佬的书《CSS 世界》中得来的。说来惭愧，买回来这本书数月，还没开始看，但由于它在桌子上就随便翻了一下，看到了一个标题，了解 CSS 世界中的“未定义行为”。我并没有细看，只是扫了一眼，简而言之就是浏览器存在着许多未定义行为，毕竟 CSS 的各种组合太丰富了，程序员也不可能完全考虑到所有的情况。故未定义的行为可能会有各种奇怪的现象。
+
