@@ -1,7 +1,7 @@
 ---
 title: 如何培养自信
 date: 2018-09-25 20:04:30
-tags: [心理学, 自信]
+tags: [思考]
 abstract: Develop a feeling of possible, and I want becomes I will.
 ---
 
