@@ -4,7 +4,7 @@ date: 2018-09-25 20:04:30
 tags: [思考]
 abstract: Develop a feeling of possible, and I want becomes I will.
 categories: 
-- [胡思乱想]
+- [胡言乱语]
 ---
 
 ## 前言
