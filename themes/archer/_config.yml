@@ -10,7 +10,7 @@ social:
   email: caren_szu@foxmail.com
   github: https://github.com/profileCaren
   # wechat and qq should be a path of qr-code image
-  wechat: /assets/wechat.jpg
+  # wechat: /assets/wechat.jpg
   qq: 
   telegram: 
   weibo: 
@@ -30,9 +30,8 @@ social:
   rss: /atom.xml
 # friends
 friends:
-  friendA: //www.baidu.com
-  Google: //www.google.com
-  friendC: 
+  三毛: https://jkchao.cn/code
+
 about:
   enable: true
   # image: '/intro/about-bg.jpg'
