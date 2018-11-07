@@ -1,10 +1,7 @@
 ---
 title: 对 Gmail 创始人 Paul Buchheit 的访谈摘录
-tags:
-  - 网络内容摘录
+tags: [网络内容摘录]
 abstract: TripleByte 对 Gmail 创始人 Paul Buchheit 的进行了一个访谈，访谈内容很不错，我看完原文后获益匪浅，故在此做摘录以作备忘。
-categories:
-  - [读书笔记, blog]
 date: 2018-11-02 10:57:44
 updated: 2018-11-02 10:57:44
 ---

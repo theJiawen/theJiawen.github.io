@@ -3,8 +3,6 @@ title: Chrome 中 table 布局的的重叠边框 bug
 date: 2018-10-22 17:53:30
 updated: 2018-10-22 17:53:30
 tags: [Bug, CSS]
-categories:
-- [前端, CSS]
 ---
 
 今天在实现一个表格布局的时候遭遇了 Chrome 的一个 bug。没错，这次不是我们的问题，是 [chrome 的问题](https://bugs.chromium.org/p/chromium/issues/detail?id=356132)。
