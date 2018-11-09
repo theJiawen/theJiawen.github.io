@@ -74,13 +74,13 @@ comment:
   livere_uid: 
 
   # Disqus  site: https://disqus.com/
-  disqus_shortname:
+  disqus_shortname: jiawen-2
 
   # Gitment  site: https://github.com/imsun/gitment
-  gitment_owner: profileCaren
-  gitment_repo: blog-comments
-  gitment_client_id: 0ea94fa2e3ce6dfdc2b3
-  gitment_client_secret: 14fa32cf50024c39472fb07574f05857f384203c
+  # gitment_owner: profileCaren
+  # gitment_repo: blog-comments
+  # gitment_client_id: 0ea94fa2e3ce6dfdc2b3
+  # gitment_client_secret: 14fa32cf50024c39472fb07574f05857f384203c
 
   # Youyan  site: http://www.uyan.cc/
   youyan_uid: 
