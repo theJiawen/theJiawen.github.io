@@ -21,7 +21,7 @@ social:
   instagram: 
   stack-overflow: 
   segmentFault: 
-  juejin: 
+  juejin: https://juejin.im/user/58ae53965c497d006770691d
   v2ex: 
   bilibili: 
   linkedin: 
@@ -40,7 +40,7 @@ about:
 
 # ========== Site ========== #
 # title of the site (good for SEO)
-SEO_title: 赖嘉文的个人网站- Caren Lai's personal Website
+SEO_title: 赖嘉文的个人网站 - Caren Lai's personal Website
 # keywords for site (good for SEO)
 SEO_keywords:
   - '赖嘉文'
