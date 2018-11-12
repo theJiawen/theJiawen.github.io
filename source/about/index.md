@@ -1,24 +1,46 @@
 ---
-title: About Caren Lai
+title: About Jiawen Lai
 date: 2018-09-10 17:14:47
 layout: about
 ---
 
-## 个人信息
+## 关于我
+```js
+const BlogOwner = {
+  name: "Jiawen Lai",
+  position: "Web Developer / Front-end Engineer",
+  bornIn: 1996,
+  location: 'Shenzhen, China',
 
-- 前端工程师 / 软件工程师
-- 生性无趣，样貌平平无奇
-- 上面那条是反话
+  education:{
+    school: "Shenzhen University",
+    major: "Software engineering",
+    yearOfGraduation: 2018
+  }
+
+  tags: ["港乐", "Creation", "Body-building", "Reading", "Piece hand"]
+};
+
+```
+**[Piece hand](https://www.google.com.tr/search?q=%E6%AE%B5%E5%AD%90%E6%89%8B+%E8%8B%B1%E6%96%87&oq=%E6%AE%B5%E5%AD%90%E6%89%8B+%E8%8B%B1%E6%96%87&aqs=chrome..69i57j69i60.1072j0j7&sourceid=chrome&ie=UTF-8)*
 
 ## 关于本站
 
-建立时间： 2018 年 9 月 11 日。
+本站建立于 2018 年 9 月 11 日。建立个人博客的想法产生于刘未鹏先生的一篇博文:[《为什么你应该（从现在开始就）写博客》](http://mindhacks.cn/2009/02/15/why-you-should-start-blogging-now/)。文中阐述了写一个长期价值博客的诸多好处，摘取标题列举如下：
 
-建立原因：
+> 1) 能够交到很多志同道合的朋友。
+> 2) 书写是为了更好的思考。
+> 3) “教”是最好的“学”。
+> 4) 讨论是绝佳的反思。
+> 5) 激励你去持续学习和思考。
+> 6) 学会持之以恒地做一件事情。
+> 7) 一个长期的价值博客是一份很好的简历。
+ 
+基本上来说，刘未鹏先生的这篇文章概括了我建立博客所有目的。但我要额外补充一点，这一点也是我建立博客的直接诱因：
 
-1. 好玩。
-2. 记录和分享对技术和生活的思考。
-3. 看了刘未鹏大大的两篇博文
-   - [为什么你应该（从现在开始就）写博客](http://mindhacks.cn/2009/02/15/why-you-should-start-blogging-now/)
-   - [怎么花两年的时间去面试一个人](http://mindhacks.cn/2011/11/04/how-to-interview-a-person-for-two-years/)
-4. 给妹子留下好印象：之前克里斯蒂娜居然去 google 我的名字，搜出来的结果都是数年前的腾讯微博，那可真叫一个羞耻。为了避免以后还有妹子 search 我却看到羞耻的内容，我得留点有用的东西在网络上。
+**不能被妹子看到不该看的东西**：前段时间 Christina 去 google 我的名字，居然看到了我数年前的腾讯微博，里面的内容相当令人羞耻。为了避免重蹈覆辙，我得留点有用的东西在网络上。
+
+
+![帅](https://caren-1253602298.cos.ap-guangzhou.myqcloud.com/tiantai-min.jpg)
+
+
