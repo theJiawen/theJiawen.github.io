@@ -46,13 +46,13 @@ SEO_keywords:
   - '赖嘉文'
   - 'Caren Lai'
 # main title shown in header image
-main_title: 嘉文的个人网站
+main_title: 嘉文
 # subtitle
 subtitle: Make good results, since the stupid world cares only results.
 # site haeder image
 site_header_image: '/intro/index-bg.jpg'
 # post haeder image
-post_header_image: '/intro/post-bg.jpg'
+post_header_image: https://source.unsplash.com/1266x477/daily?technology
 # 404 image
 _404_image: '/intro/404-bg.jpg'
 
