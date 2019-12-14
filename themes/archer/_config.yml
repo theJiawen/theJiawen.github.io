@@ -2,12 +2,12 @@
 # avatar
 avatar: /avatar/skateboard.jpg
 # author name
-author: 嘉文
+author: Jiawen Lai
 # signature
-signature: Make good results, if the stupid world cares only results.
+signature: Result-oriented
 # SNS (you can custom the order)
 social:
-  email: caren_szu@foxmail.com
+  email: fantastic@laijiawen.com
   github: https://github.com/profileCaren
   # wechat and qq should be a path of qr-code image
   # wechat: /assets/wechat.jpg
@@ -40,15 +40,16 @@ about:
 
 # ========== Site ========== #
 # title of the site (good for SEO)
-SEO_title: 赖嘉文的个人网站 - Caren Lai's personal Website
+SEO_title: 赖嘉文的个人网站 - Jiawen Lai's personal Website
 # keywords for site (good for SEO)
 SEO_keywords:
   - '赖嘉文'
   - 'Caren Lai'
+  - 'Jiawen Lai'
 # main title shown in header image
-main_title: 嘉文
+main_title: Jiawen Lai
 # subtitle
-subtitle: Make good results, since the stupid world cares only results.
+subtitle: A Software Engineer Blog
 # site haeder image
 site_header_image: '/intro/index-bg.jpg'
 # post haeder image

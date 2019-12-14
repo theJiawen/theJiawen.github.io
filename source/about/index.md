@@ -6,23 +6,16 @@ layout: about
 
 ## 关于我
 ```js
-const BlogOwner = {
+const Author = {
   name: "Jiawen Lai",
-  position: "Web Developer / Front-end Engineer",
-  bornIn: 1996,
-  location: 'Shenzhen, China',
+  position: "Web Developer / Software Engineer",
+  location: 'California, USA',
 
-  education:{
-    school: "Shenzhen University",
-    major: "Software engineering",
-    yearOfGraduation: 2018
-  }
-
-  tags: ["港乐", "Creation", "Body-building", "Reading", "Piece hand"]
+  tags: ["software engineer", "web developer"]
+  otherTags: ["psychology enthusiast", "lifelong learner", "joke-maker"]
 };
 
 ```
-**[Piece hand](https://www.google.com.tr/search?q=%E6%AE%B5%E5%AD%90%E6%89%8B+%E8%8B%B1%E6%96%87&oq=%E6%AE%B5%E5%AD%90%E6%89%8B+%E8%8B%B1%E6%96%87&aqs=chrome..69i57j69i60.1072j0j7&sourceid=chrome&ie=UTF-8)*
 
 ## 关于本站
 
@@ -36,11 +29,13 @@ const BlogOwner = {
 > 6) 学会持之以恒地做一件事情。
 > 7) 一个长期的价值博客是一份很好的简历。
  
-基本上来说，刘未鹏先生的这篇文章概括了我建立博客所有目的。但我要额外补充一点，这一点也是我建立博客的直接诱因：
+刘未鹏先生基本上概括了我建立博客所有目的。但我想补充一点，这一点也是我建立博客的直接诱因：
 
 **不能被妹子看到不该看的东西**：前段时间 Christina 去 google 我的名字，居然看到了我数年前的腾讯微博，里面的内容相当令人羞耻。为了避免重蹈覆辙，我得留点有用的东西在网络上。
 
 
+
 ![帅](https://caren-1253602298.cos.ap-guangzhou.myqcloud.com/tiantai-min.jpg)
 
-
+*Updated at Dec 14, 2019*
+*Created at Sep 14, 2018*

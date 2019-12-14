@@ -1,7 +1,7 @@
 language: node_js
 sudo: required
 node_js: 
-  - 7.9.0
+  - 12.4.0
 
 branches:
   only:
