@@ -102,9 +102,9 @@ deploy:
   type: git
 
   # 正常deploy
-  # repo: git@caren.github.com:profileCaren/profileCaren.github.io.git
+  # repo: git@caren.github.com:theJiawen/theJiawen.github.io.git
 
   # CI deploy
-  repo: https://gh_token@github.com/profileCaren/profileCaren.github.io.git
+  repo: https://gh_token@github.com/theJiawen/theJiawen.github.io.git
   branch: master
   message: 

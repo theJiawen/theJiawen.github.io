@@ -8,7 +8,7 @@ signature: Result-oriented
 # SNS (you can custom the order)
 social:
   email: fantastic@laijiawen.com
-  github: https://github.com/profileCaren
+  github: https://github.com/theJiawen
   # wechat and qq should be a path of qr-code image
   # wechat: /assets/wechat.jpg
   qq: 
@@ -79,7 +79,7 @@ comment:
   disqus_shortname: jiawen-2
 
   # Gitment  site: https://github.com/imsun/gitment
-  # gitment_owner: profileCaren
+  # gitment_owner: theJiawen
   # gitment_repo: blog-comments
   # gitment_client_id: 0ea94fa2e3ce6dfdc2b3
   # gitment_client_secret: 14fa32cf50024c39472fb07574f05857f384203c

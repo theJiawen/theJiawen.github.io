@@ -1,20 +1,13 @@
 ---
-title: About Jiawen Lai
+title: 关于我
 date: 2018-09-10 17:14:47
 layout: about
 ---
 
 ## 关于我
 ```js
-const Author = {
-  name: "Jiawen Lai",
-  position: "Web Developer / Software Engineer",
-  location: 'California, USA',
 
-  tags: ["software engineer", "web developer"]
-  otherTags: ["psychology enthusiast", "lifelong learner", "joke-maker"]
-};
-
+一个软件工程师，分享、记录一些生活体会以及学习所得。
 ```
 
 ## 关于本站
@@ -37,5 +30,5 @@ const Author = {
 
 ![帅](https://caren-1253602298.cos.ap-guangzhou.myqcloud.com/tiantai-min.jpg)
 
-*Updated at Dec 14, 2019*
+*Updated at Nov 9, 2020*
 *Created at Sep 14, 2018*
