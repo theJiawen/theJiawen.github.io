@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Jiawen Lai">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Jiawen Lai">
+    
+    <meta name="keywords" content="赖嘉文,Caren Lai,Jiawen Lai">
+    
+    <meta name="description" content="A Software Engineer's Blog">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>如何避免被洗脑(上) · 赖嘉文的个人网站 - Jiawen Lai&#39;s personal Website</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon2.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?612abc19987eb353274e306514a41f30";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+    <!-- 谷歌统计  -->
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-125674942-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Jiawen Lai</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">如何避免被洗脑(上)</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Jiawen Lai</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/1266x477/daily?technology)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            如何避免被洗脑(上)
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "心理学">心理学</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "读书笔记">读书笔记</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.9k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/09/23</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间工作 <del>需求不饱和</del> 工作效率较高，于是可以在上班时间抽空看看书。由于一直对心理学感兴趣，便下载了一本《影响力》来看。这本书咋听中文翻译，像是管理学的书籍，类似教你怎么扩大自己的影响力之类的，但翻阅一下目录就知道不是这么回事。本书原作名是《Influence: The Psychology of Persuasion》,其实讲的是你是如何被说服(洗脑)的。原本我只是带着随便翻翻的心态看了一下，但我确实被本书震撼到了，震撼的原因有2点：</p>
+<ol>
+<li>本书介绍的六个原理确实非常有效。绝大多数人都应该有过深刻的体会。</li>
+<li>本书说理的逻辑十分严谨。几乎所有在我阅读过程中产生的疑惑，在后文都被作者解答了。一般的书，说理的时候是这样A-&gt;B，这个逻辑正常人都懂，稍微好一点的书分析到了A-&gt;B-&gt;C，而这本书可能有些章节就让你有 A-&gt;B-&gt;C-&gt;D-&gt;E的感觉，醍醐灌顶。在你本以为这个原理大概就这样了，后面应该都是同样的例子了的时候，他又会提出关于该原理的新的问题和假设，并用实验验证。</li>
+</ol>
+<p>本文分别介绍《影响力》一书中讲述的六个影响力武器，并加上我自己对于它们的体会。分别有对比原理、互惠原理、一致性原理、社会认同原理、喜好原理、权威原理、短缺原理。作者讲述的逻辑是这样的：</p>
+<ol>
+<li>先用一个亲身经历或者邻居等等的例子，来说明这个原理起了效果。</li>
+<li>分析它是怎么起的效果。</li>
+<li>该原理还可以被如何运用</li>
+<li><strong>如何保护自己不被这个原理给欺骗</strong>。</li>
+</ol>
+<h2 id="对比原理"><a href="#对比原理" class="headerlink" title="对比原理"></a>对比原理</h2><p>这个原理十分好理解，不需赘述。简而言之就是，如果两件东西很不一样，我们往往会认为他们的差别比实际的更大。如果我们拿起一个很轻的东西，再拿一个重的东西，就会觉得后者比单独拿起来时还要重；如果我们在酒吧里刚认识一个很漂亮的女生，又遇到一个平平无奇的女生，后面这个女生就会显得更缺乏吸引力。</p>
+<h3 id="常见情形"><a href="#常见情形" class="headerlink" title="常见情形"></a>常见情形</h3><ol>
+<li><p>购物 1。假设你已经买了贵的东西，很容易会继续买便宜很多的东西，即使便宜的东西按照你平时的标准也不便宜。以我亲身经历来说，我上次去看牙，因为要做的项目很多，那个小姐姐就先给我介绍了最贵的种牙项目，8800 块钱，我说 ok 之后。我注意到我对于价格认知已经发生了变化，后面挑选的相对便宜（但仍旧很贵）的牙冠、补牙等等项目，我都没有太多犹豫了。但我回头细想，特么的我买个很喜欢的耳机 2000 块都不舍得，要等到双十一买。做个牙冠居然花了我 3500.</p>
+</li>
+<li><p>购物 2。房地产公司往往会保留一两套很破但价格很高的房子。他们不是用来卖的，是用来给顾客看的。这样相比之下，那些公司真正想要卖掉的房子就会显得格外有吸引力。</p>
+</li>
+</ol>
+<h2 id="互惠原理"><a href="#互惠原理" class="headerlink" title="互惠原理"></a>互惠原理</h2><p>互惠原理认为，我们应该尽量以相同的方式报答他人为我们所做的一切。互惠原理之所以可以成为有效说服他人的工具，一个重要的原因就在于它所蕴藏的巨大力量，它可以让我们产生多余的负债感。</p>
+<blockquote>
+<p>值得注意的是，在这个过程中双方的力量极不平衡，因为所有真正的选择权都掌握在乔的手中，他选择了最初给予恩惠的形式，也选择了回报恩惠的形式。</p>
+</blockquote>
+<h3 id="“拒绝——退让”策略"><a href="#“拒绝——退让”策略" class="headerlink" title="“拒绝——退让”策略"></a>“拒绝——退让”策略</h3><p>这是另一种方法可以利用互惠原理让他人答应自己的请求，这种方式更为巧妙。从广义上讲，互惠原理说的是如果一个人对我们采取了某种行为，我们应该以类似的行为去回报。而这个原理产生的另一个结果是，如果他人对我们做出了让步，我们也有义务作出让步。举一个例子，</p>
+<blockquote>
+<p>有一天我正在街上走着，迎面过来一个十一二岁的男孩。他先做了一番自我介绍，然后问我要不要买几张周六晚年度童子军杂技表演的票， 5 块钱一张。我对这种事情向来没什么兴趣，因此婉言谢绝了。“哦，既然你不想买杂技表演的票，”他说，“那要不要买几块我们的大巧克力？只要一元钱一块哟。”我买了两块，巧克力；（b）我不喜欢随便花钱；（c）我站在那里，手里拿着两块他的巧克力；（d）他拿着我的两块钱走掉了</p>
+</blockquote>
+<p>通过这个原理我们可以使用一个将这个退让的过程利用起来，成为一种说服的技巧。 这种技巧简称<strong>“拒绝——退让”策略</strong>： 假设你想让我答应你的一个请求，有一个方法可以大大提高你的成功率：你先向我提出一个比较大的，极有可能会被拒绝的请求，然后当我拒绝了这个请求之后你再提出一个比较小一些的、你真正感兴趣的请求。如果你能很有技巧的提出第二个请求，就会让我认为这第二个请求是你做出的第一个让步，因而让我觉得自己也有义务做出相应的让步。我现在就有这样一个机会，即同意你的第二个请求。注意一点，最初提出的请求不可以太极端太无理。另外需要注意的是，这个策略也利用了对比原理。</p>
+<h4 id="拒绝退让策略的弊端"><a href="#拒绝退让策略的弊端" class="headerlink" title="拒绝退让策略的弊端"></a>拒绝退让策略的弊端</h4><ol>
+<li>因为被迫做出妥协的怀恨在心，因而拒绝履行口头做出的承诺。</li>
+<li>可能会对那个工于心计使用“拒绝——退让”的人失去信任，决定以后不再跟他打交道。</li>
+</ol>
+<h4 id="拒绝退让策略能起作用的根本原因"><a href="#拒绝退让策略能起作用的根本原因" class="headerlink" title="拒绝退让策略能起作用的根本原因"></a>拒绝退让策略能起作用的根本原因</h4><p>使得对方对协议的达到负有更多的<strong>责任感</strong>和更高的<strong>满意度。</strong></p>
+<ul>
+<li>责任：是我使得对方做出了让步，因而我对最后的谈判结果负有更多责任。</li>
+<li>满意度：如果一个协议的达成是通过对方的让步得到的，我们对谈判的最后的结果会最为满意。</li>
+</ul>
+<h3 id="如何保护自己"><a href="#如何保护自己" class="headerlink" title="如何保护自己"></a>如何保护自己</h3><ol>
+<li>不要一味的拒绝别人的善意，因为有时候确实是善意而不是套路。</li>
+<li>判断他人最初给予我们的恩惠是不是我们想要的。</li>
+</ol>
+<h3 id="常见情形-1"><a href="#常见情形-1" class="headerlink" title="常见情形"></a>常见情形</h3><ol>
+<li>路边的假和尚，送你一个护身符，然后募捐。</li>
+<li>免费试用。使用之后产生了负债感，就试图通过买他们的商品来消除。今天才因为尝了一口酸奶而花了12块买了两瓶，原本只是打算买咖啡的:)</li>
+</ol>
+<h2 id="一致性原理"><a href="#一致性原理" class="headerlink" title="一致性原理"></a>一致性原理</h2><blockquote>
+<p>几名加拿大的心理学家曾做过一项实验，结果在赌马者身上发现了一个有趣的现象，那就是赌马者一旦下了赌注，他们立刻对自己所买的那匹马的信心大增。其实这批马获胜的概率一点也没有改变，马还是原来那匹马，赛道还是原来那条赛道，赛场还是原来那个赛场。但在这些赌马者的眼中，一旦下了赌注之后，这批马获胜的希望就大大地提高了。虽然这种转变乍见之下有点让人迷惑不解，但其成因却与一种常见的社会影响力的武器有着密切的关系。像其他影响力的武器一样，这种武器也深藏在我们当中，不漏声色地指导我们的行为。简单地说，这种武器就是一种要与我们过去的所作所为保持一致的愿望。一旦我们做出了某个决定，或选择了某种立场，就会面对来自个人和外部的压力迫使我们的言行与它保持一致。在这种压力之下，我们会采取某种行为以证明我们之前所做的决策.</p>
+</blockquote>
+<p>如果你对某件事情做出了承诺，或者持有了某种看法，你将会在未来对此保持一致。想法的生根发芽就是这么来的。</p>
+<h3 id="承诺是关键"><a href="#承诺是关键" class="headerlink" title="承诺是关键"></a>承诺是关键</h3><p>作者通过数个例子说明了一致性原理对人类行为的巨大影响力，那么我们如何去使用这种力量呢？<strong>承诺</strong>是关键。如果我能让你做出承诺（也就是选择某种立场），我就为你下一步机械的、无意识的保持一致的行为准备好了舞台。一旦选择了某种立场，固执的坚持这个立场是一种自然趋势。</p>
+<p>这个承诺需要有几个重要的特征，主动性、公开性、需要付出更多的努力才能做到、以及内心的选择。最重要的是最后一点。这一点对于儿童教育有着重要意义，当我们想要孩子们真正相信一件事情时，不应该去贿赂他们或威胁他们，而应该想办法让孩子们相信他们的做法是对的。对做父母的人来说，挑选一个恰如其分的理由可不是一件容易的事情，但这个努力是会有回报的。这个理由很可能就是短暂顺从和长期承诺之间的分界线。</p>
+<h3 id="如何保护自己-1"><a href="#如何保护自己-1" class="headerlink" title="如何保护自己"></a>如何保护自己</h3><p>使用两种信号提醒自己当我们意识到自己落入了某种圈套，不得不做出自己不想做的事情时，问自己<br><strong>如果时光倒流，我还会做出同样的选择吗？</strong></p>
+<h3 id="常见情形-2"><a href="#常见情形-2" class="headerlink" title="常见情形"></a>常见情形</h3><ol>
+<li>打电话推销，先问你 how’s your day. 你说还不错，然后他后面的推销会更加顺利。（但我感觉在中国不太 work）</li>
+<li>制定一个目标，并把它写下来，不管这个目标是什么，重要的是你要把它写下来。这个方法也可以用在企业管理，让员工写下这个月努力的方向。并挂在显眼的位置。</li>
+<li>卖东西时，先虚报一个较低的价格， 让客户产生想买的欲望。到后面再通过一些策略把价格调回去。“忘记算xx了，不好意思”</li>
+</ol>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>本文先描述了前三个影响力武器：对比原理、互惠原理以及一致性原理，并说明了如何避免他人使用这些武器对我们造成影响。本来想一次总结完，但本书内容确实丰富，没有办法一篇文章讲完，甚至每章都可以用一篇文章来讲述。故我们还是分为上下两部份分开讲好了。<br>That’s it.</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://laijiawen.com">Jiawen Lai</a>
+            <p>原文链接：<a href="http://laijiawen.com/posts/how-to-avoid-being-brainwashed-part-1/">http://laijiawen.com/posts/how-to-avoid-being-brainwashed-part-1/</a>
+            <p>发表日期：<a href="http://laijiawen.com/posts/how-to-avoid-being-brainwashed-part-1/">September 23rd 2018, 8:53:27 pm</a>
+            <p>更新日期：<a href="http://laijiawen.com/posts/how-to-avoid-being-brainwashed-part-1/">November 10th 2020, 2:01:37 am</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/posts/how-to-grow-confidience/" title= "如何培养自信">
+                    <div class="nextTitle">如何培养自信</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "http://laijiawen.com/posts/how-to-avoid-being-brainwashed-part-1/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "如何避免被洗脑(上)"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://jiawen-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:fantastic@laijiawen.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/theJiawen" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://twitter.com/profileCaren" class="iconfont-archer twitter" target="_blank" title=twitter></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://juejin.im/user/58ae53965c497d006770691d" class="iconfont-archer juejin" target="_blank" title=juejin></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">对比原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%83%85%E5%BD%A2"><span class="toc-number">2.1.</span> <span class="toc-text">常见情形</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E6%83%A0%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">互惠原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%9C%E6%8B%92%E7%BB%9D%E2%80%94%E2%80%94%E9%80%80%E8%AE%A9%E2%80%9D%E7%AD%96%E7%95%A5"><span class="toc-number">3.1.</span> <span class="toc-text">“拒绝——退让”策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E9%80%80%E8%AE%A9%E7%AD%96%E7%95%A5%E7%9A%84%E5%BC%8A%E7%AB%AF"><span class="toc-number">3.1.1.</span> <span class="toc-text">拒绝退让策略的弊端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E9%80%80%E8%AE%A9%E7%AD%96%E7%95%A5%E8%83%BD%E8%B5%B7%E4%BD%9C%E7%94%A8%E7%9A%84%E6%A0%B9%E6%9C%AC%E5%8E%9F%E5%9B%A0"><span class="toc-number">3.1.2.</span> <span class="toc-text">拒绝退让策略能起作用的根本原因</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8A%A4%E8%87%AA%E5%B7%B1"><span class="toc-number">3.2.</span> <span class="toc-text">如何保护自己</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%83%85%E5%BD%A2-1"><span class="toc-number">3.3.</span> <span class="toc-text">常见情形</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">一致性原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%BF%E8%AF%BA%E6%98%AF%E5%85%B3%E9%94%AE"><span class="toc-number">4.1.</span> <span class="toc-text">承诺是关键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8A%A4%E8%87%AA%E5%B7%B1-1"><span class="toc-number">4.2.</span> <span class="toc-text">如何保护自己</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%83%85%E5%BD%A2-2"><span class="toc-number">4.3.</span> <span class="toc-text">常见情形</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 9
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/20</span><a class="archive-post-title" href= "/posts/implement-new-indentifier-of-javascript/" >如何实现 JavaScript 的 new 运算符</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href= "/posts/what-was-I-thinking-when-I-was-pulled-out-ouf-my-teeth/" >当我拔牙的时候我在想什么</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/02</span><a class="archive-post-title" href= "/posts/Extract-from-the-interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit/" >对 Gmail 创始人 Paul Buchheit 的访谈摘录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/posts/proxy-pattern-and-its-application/" >代理模式- JavaScript 设计模式(二)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/posts/strategy-pattern-and-its-application/" >策略模式- JavaScript 设计模式(一)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/posts/a-collapsing-border-bug-in-chrome/" >Chrome 中 table 布局的的重叠边框 bug</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/posts/how-to-break-though-the-constraints-of-environment/" >如何突破环境对人的制约</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/25</span><a class="archive-post-title" href= "/posts/how-to-grow-confidience/" >如何培养自信</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/posts/how-to-avoid-being-brainwashed-part-1/" >如何避免被洗脑(上)</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="网络内容摘录"><span class="iconfont-archer">&#xe606;</span>网络内容摘录</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bug"><span class="iconfont-archer">&#xe606;</span>Bug</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="心理学"><span class="iconfont-archer">&#xe606;</span>心理学</span>
+    
+        <span class="sidebar-tag-name" data-tags="读书笔记"><span class="iconfont-archer">&#xe606;</span>读书笔记</span>
+    
+        <span class="sidebar-tag-name" data-tags="思考"><span class="iconfont-archer">&#xe606;</span>思考</span>
+    
+        <span class="sidebar-tag-name" data-tags="JavaScript"><span class="iconfont-archer">&#xe606;</span>JavaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
+    
+        <span class="sidebar-tag-name" data-tags="JavaScript设计模式"><span class="iconfont-archer">&#xe606;</span>JavaScript设计模式</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Caren-how"><span class="iconfont-archer">&#xe60a;</span>Caren-how</span>
+    
+        <span class="sidebar-category-name" data-categories="JavaScript-设计模式"><span class="iconfont-archer">&#xe60a;</span>JavaScript-设计模式</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Jiawen Lai"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

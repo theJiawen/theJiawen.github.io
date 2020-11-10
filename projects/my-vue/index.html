@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Profile</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ name }}'s profile</h1>
+      <p>age: {{ age }}</p>
+      <p>age after 10 years: {{ ageAfter10Years }}</p>
+      <p>age after 20 years: {{ ageAfter20Years }}</p>
+      <p>height: {{ height }}</p>
+      <label
+        >description: <input type="text" name="desc" v-model="description"
+      /></label>
+      <p>
+        best friend: <a :href="bestFriend.link"> {{ bestFriend.name }}</a>
+      </p>
+      <span style="color: red"></span>
+
+      <button onclick="start()">Show me some magic</button>  <=== <span style="color: red">{{ 不要点我 }}</span>
+    </div>
+
+    <script src="./publisher-subscriber.js"></script>
+    <script src="./template-compiler.js"></script>
+    <script src="./my-vue.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

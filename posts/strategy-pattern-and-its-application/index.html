@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Jiawen Lai">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Jiawen Lai">
+    
+    <meta name="keywords" content="赖嘉文,Caren Lai,Jiawen Lai">
+    
+    <meta name="description" content="A Software Engineer's Blog">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>策略模式- JavaScript 设计模式(一) · 赖嘉文的个人网站 - Jiawen Lai&#39;s personal Website</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon2.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?612abc19987eb353274e306514a41f30";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+    <!-- 谷歌统计  -->
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-125674942-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Jiawen Lai</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">策略模式- JavaScript 设计模式(一)</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Jiawen Lai</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/1266x477/daily?technology)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            策略模式- JavaScript 设计模式(一)
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "读书笔记">读书笔记</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JavaScript设计模式">JavaScript设计模式</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.9k</span>阅读时长: <span class="post-count reading-time">11 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/10/25</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="写在“设计模式系列“第一篇的开头"><a href="#写在“设计模式系列“第一篇的开头" class="headerlink" title="写在“设计模式系列“第一篇的开头"></a>写在“设计模式系列“第一篇的开头</h1><p>本系列作为《JavaScript 设计模式与开发实践》一书的读书笔记，将介绍前端开发中常用的一些设计模式。目前已经有非常多的优秀文章将设计模式讲的很好了，笔者写作的初衷有以下几点：</p>
+<ol>
+<li>备忘。</li>
+<li><a target="_blank" rel="noopener" href="http://mindhacks.cn/2009/02/15/why-you-should-start-blogging-now/">教是最好的学</a>。只有当我们能将知识准确、完整的用自己的语言阐述出来，才能说明我真的懂了。</li>
+</ol>
+<p>总体而言，是为了巩固知识。<br>本系列所有文章的讲述逻辑一般将会是这样的：</p>
+<ol>
+<li>先讲述从一个具体的需求。</li>
+<li>讲述正常思维的实现以及其缺点，缺点一般是代码难以维护。</li>
+<li>讲述如何使用某个设计模式实现该需求及其优点。</li>
+<li>该设计模式的拓展。</li>
+</ol>
+<p>之所以使用这样的介绍逻辑，是因为我们就是这样思考的。当我们遇到一个业务需求，心里面并不是想着：</p>
+<blockquote>
+<p>好的，这次我要用命令模式实现它！</p>
+</blockquote>
+<p>而是在遇到一个问题的时候，突然感觉这个需求好像和某个设计模式的适用场景情境很像，于是心想</p>
+<blockquote>
+<p>咦，这个场景好像和命令模式的场景很相似，我去看看能不能用命令模式实现它。</p>
+</blockquote>
+<p>所以，<strong>我们的介绍重点不在于设计模式，而在于场景</strong>。读者需要理解的重点也是为何这个场景需要使用某个模式，优点体现在哪里，而不是这个设计模式的定义是什么。</p>
+<p>话不多说，让我们开始介绍策略模式。按照惯例，应该先介绍单例模式，但单例模式太简单了，笔者不愿赘述，故直接从策略模式开始。</p>
+<h1 id="例子1：计算年终奖"><a href="#例子1：计算年终奖" class="headerlink" title="例子1：计算年终奖"></a>例子1：计算年终奖</h1><p>现在假设一个公司的年终奖是根据<strong>工资基数</strong>和<strong>绩效等级</strong>来发放的：</p>
+<table>
+<thead>
+<tr>
+<th>绩效等级</th>
+<th>年终奖数额</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S</td>
+<td>四倍工资</td>
+</tr>
+<tr>
+<td>A</td>
+<td>三倍工资</td>
+</tr>
+<tr>
+<td>B</td>
+<td>两倍工资</td>
+</tr>
+</tbody></table>
+<h2 id="初级工程师版本"><a href="#初级工程师版本" class="headerlink" title="初级工程师版本"></a>初级工程师版本</h2><p>一个新手的JavaScript工程师会这样写:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> calculateBonus = <span class="function"><span class="keyword">function</span>(<span class="params">performanceLevel, salary</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (performanceLevel === <span class="string">&quot;S&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> salary * <span class="number">4</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (performanceLevel === <span class="string">&quot;A&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> salary * <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (performanceLevel === <span class="string">&quot;B&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> salary * <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这带来的问题是假设你要新增一个<code>C</code>绩效等级，就要去增加一个<code>if</code>，新增这个<code>if</code>的同时又有可能改动到别的逻辑。一个重要的原则是，凡是你发现你代码里面很多<code>if</code>判断，说明它可以被优化。具体的优化方式有很多种，可以点击这个<a target="_blank" rel="noopener" href="https://jrsinclair.com/articles/2017/javascript-but-less-iffy/">链接</a>去了解一下。</p>
+<h2 id="中级工程师版本-策略模式"><a href="#中级工程师版本-策略模式" class="headerlink" title="中级工程师版本(策略模式)"></a>中级工程师版本(策略模式)</h2><p>一个略有经验的工程师则会这样写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Strategies = &#123;</span><br><span class="line">  <span class="string">&quot;S&quot;</span>: <span class="function"><span class="params">salary</span>=&gt;</span> salary * <span class="number">4</span>,</span><br><span class="line">  <span class="string">&quot;A&quot;</span>: <span class="function"><span class="params">salary</span>=&gt;</span> salary * <span class="number">3</span>,</span><br><span class="line">  <span class="string">&quot;B&quot;</span>: <span class="function"><span class="params">salary</span>=&gt;</span> salary * <span class="number">2</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> calculateBonus = <span class="function">(<span class="params">performanceLevel, salary</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Strategies[performanceLevel](salary);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个绩效等级为S，薪资为15000的员工。</span></span><br><span class="line">calculateBonus(<span class="string">&#x27;S&#x27;</span>, <span class="number">15000</span>); <span class="comment">// 60000</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>实际上, 这就是策略模式。<br><img src="https://user-gold-cdn.xitu.io/2018/10/25/166a91c67a20940a?w=250&h=250&f=png&s=31371" alt=""></p>
+<p>在传统面向对象语言中，要实现策略模式需要定义</p>
+<ol>
+<li>一组策略类，策略类封装了具体的算法。</li>
+<li>环境类 Context，Context 接受客户的请求，随后将请求委托给某一个策略类。</li>
+</ol>
+<p>太麻烦了。而 JavaScript 则由于它丰富的表达能力，可以将<code>calculateBonus</code>函数看成是Context，将<code>Strategies</code>对象看成一组策略，轻松地实现了一个策略模式。</p>
+<h2 id="额外的tips"><a href="#额外的tips" class="headerlink" title="额外的tips"></a>额外的tips</h2><p>上文“中级工程师”版本的写法其实还有个小问题，就是 performanceLevel 这个变量是硬编码的，比如<code>&quot;S&quot;</code>, <code>&quot;A&quot;</code>, <code>&quot;B&quot;</code>。这么短的一个字符可能不会带来什么问题，但假设这个策略的名称比较长，比如<code>&quot;Christina&quot;</code>，那你就很容易敲错，敲错就出 bug 了嘛。</p>
+<p>我们可以用ES6的<a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/#docs/symbol">Symbol</a>和<a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/#docs/destructuring">解构</a>把它改写一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PERFORMANCE_LEVEL = &#123;<span class="attr">S</span>:<span class="string">&#x27;S&#x27;</span>, <span class="attr">A</span>: <span class="string">&#x27;A&#x27;</span>, <span class="attr">B</span>: <span class="string">&#x27;B&#x27;</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> &#123;S, A, B&#125;  = PERFORMANCE_LEVEL;</span><br><span class="line"><span class="keyword">const</span> Strategies = &#123;</span><br><span class="line">  [S]: <span class="function"><span class="params">salary</span>=&gt;</span> salary * <span class="number">4</span>,</span><br><span class="line">  [A]: <span class="function"><span class="params">salary</span>=&gt;</span> salary * <span class="number">3</span>,</span><br><span class="line">  [B]: <span class="function"><span class="params">salary</span>=&gt;</span> salary * <span class="number">2</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> calculateBonus = <span class="function">(<span class="params">performanceLevel, salary</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Strategies[performanceLevel](salary);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">calculateBonus(S, <span class="number">15000</span>); <span class="comment">// 60000</span></span><br></pre></td></tr></table></figure>
+
+<p>这样会更好一点点，但当然，这和设计模式关系不大。<br>这个例子较为简单，接下来我们讲述一个更为常见的表单校验的例子。</p>
+<h1 id="例子2：表单校验"><a href="#例子2：表单校验" class="headerlink" title="例子2：表单校验"></a>例子2：表单校验</h1><p>表单几乎是前端工程师写的最多的东西，登录注册、修改用户信息都离不开表单。在提交一个表单给后台之前，客户端一般要对一些数据进行校验，比如 Email、电话是否符合格式，某些必填字段是否为空等等。</p>
+<p>现在假设我们在编写一个注册页面，校验规则如下：</p>
+<ul>
+<li>用户名不能为空</li>
+<li>密码长度不能少于6位</li>
+<li>手机号码必须符合格式。</li>
+</ul>
+<h2 id="常规思维写法"><a href="#常规思维写法" class="headerlink" title="常规思维写法"></a>常规思维写法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;registerForm&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">  请输入用户名: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;userName&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  请输入密码: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  请输入手机号码: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;phone&quot;</span> <span class="attr">name</span>=<span class="string">&quot;phoneNumber&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> registerForm = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;registerForm&#x27;</span>);</span><br><span class="line"></span><br><span class="line">registerForm.onsubmit = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> &#123;userName, password, phoneNumber&#125; = registerForm;</span><br><span class="line">  <span class="function"><span class="title">if</span>(<span class="params">userName.value === <span class="string">&#x27;&#x27;</span> </span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">&#x27;用户名不能为空&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">if</span>(<span class="params">password.value.length &lt; <span class="number">6</span></span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">&#x27;密码长度不能少于6位&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(!<span class="regexp">/(^1[3|5|8][0-9]&#123;9&#125;$)/</span>.test(phoneNumber.value))&#123;</span><br><span class="line">    alert(<span class="string">&#x27;手机号码格式不正确&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>进入这个<a target="_blank" rel="noopener" href="https://codepen.io/caren11/pen/mzQaWm">Codepen</a>玩一下。</p>
+<p>可以看到，在<code>onsubmit</code>函数中，我们对<code>registerForm</code>的每个字段逐一验证，这是十分符合逻辑的写法。但是略有经验的工程师会知道，将来我们可能要新增一些字段，比如邮箱；还有可能要对某些字段新增校验规则，比如要求密码必须同时包含大小写字符和数字。这样一来，我们就要经常对<code>onsubmit</code>函数进行修改。</p>
+<h2 id="策略模式写法"><a href="#策略模式写法" class="headerlink" title="策略模式写法"></a>策略模式写法</h2><p>原书的作者曾探大佬重构这段代码的时候，上来就封装了一个策略对象，笔者认为这样不太好理解。我们来先从目的出发，反推我们应该如何使用策略模式进行重构。一些阅读代码能力很强的读者可以直接跳到尾部的完整代码直接进行查看。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>读者可以思考一分钟，你会如何重构这部分代码。</p>
+<p>笔者的思路是这样的。基于我们写表单的经验，我们知道在将来我们可能会</p>
+<ol>
+<li>新增某些字段。</li>
+<li>对某个字段进行多种不同的校验，输出不同的提示信息。</li>
+<li>校验别的表单，但我不希望重写一份校验规则。</li>
+</ol>
+<p>基于以上假设，我们想要的效果是这样的：</p>
+<p>a. 在表单提交的时候，只需要调用 <code>validate()</code> 函数即可进行校验:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">registerForm.onsubmit = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> errorMessage = validate();</span><br><span class="line">  <span class="keyword">if</span> (errprMessage) &#123;</span><br><span class="line">    alert(errorMessage);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>b. <code>validate()</code>函数负责创建一个<code>Validator</code>，添加相应的规则，并执行校验：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> validate = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> validator = <span class="keyword">new</span> Validator();</span><br><span class="line">  <span class="comment">// 一次添加单个规则, (longerThan6 和 isPhone 都是函数)</span></span><br><span class="line">  validator.add(registerForm.password, longerThan6, <span class="string">&quot;密码长度必须大于6位&quot;</span>);</span><br><span class="line">  validator.add(registerForm.phoneNumber, isPhone, <span class="string">&quot;电话号码格式错误&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 一次添加多个规则</span></span><br><span class="line">  validator.add(registerForm.userName, [</span><br><span class="line">    &#123;</span><br><span class="line">      rule: <span class="function"><span class="params">val</span> =&gt;</span> val.length &gt; <span class="number">6</span>,</span><br><span class="line">      message: <span class="string">&quot;用户名长度必须大于六位&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; <span class="attr">rule</span>: notEmpty, <span class="attr">message</span>: <span class="string">&quot;用户名不能为空&quot;</span> &#125;</span><br><span class="line">  ]);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 开始校验，成功则返回false，失败则返回对应的errorMessage。</span></span><br><span class="line">  <span class="keyword">return</span> validator.start();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>目标就是这样，那么关键就是<code>Validator</code>这个类的实现了。</p>
+<h3 id="Validator类的实现"><a href="#Validator类的实现" class="headerlink" title="Validator类的实现"></a>Validator类的实现</h3><p>我们刚才看到，<code>Validator</code>类主要包含两个方法，<code>add</code>和<code>start</code>，除此之外，我们还需要一个<code>rules</code>数组，用于缓存待验证的值、验证函数、以及 error message. 具体代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Validator</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.rules = [];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 该方法负责添加验证规则，存储在 this.rules 中。</span></span><br><span class="line"><span class="comment">   * 其接受三个参数，第一个参数是input元素( Element )</span></span><br><span class="line"><span class="comment">   * 第二个参数可能是数组或函数，若第二个参数是数组，忽略第三个参数，</span></span><br><span class="line"><span class="comment">   * 且该数组的元素结构必须是 &#123; validateFunc: Function, errorMessage: String &#125;。</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param <span class="type">&#123;Element&#125;</span> <span class="variable">inputElement</span></span></span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param <span class="type">&#123;Array | Function&#125;</span> <span class="variable">rules</span></span></span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param <span class="type">&#123;String&#125;</span> <span class="variable">message</span></span></span></span><br><span class="line"><span class="comment">   * <span class="doctag">@memberof <span class="variable">Validator</span></span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">add</span>(<span class="params">inputElement, rules, errorMessage</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> val = inputElement.value; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果第二个参数是函数，那就是用于验证的函数咯。</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> rules === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> validateFunc = rules; <span class="comment">// 没啥意义的赋值，为了你更好的理解。</span></span><br><span class="line"></span><br><span class="line">      <span class="built_in">this</span>.rules.push(&#123;</span><br><span class="line">        value: val,</span><br><span class="line">        validateFunc: validateFunc,</span><br><span class="line">        errorMessage: errorMessage</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果第二个参数是数组，那就是一组规则，忽略第三个参数。</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(rules)) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> rule <span class="keyword">of</span> rules) &#123;</span><br><span class="line">        <span class="built_in">this</span>.rules.push(&#123;</span><br><span class="line">          value: val,</span><br><span class="line">          validateFunc: rule.validateFunc,</span><br><span class="line">          errorMessage: rule.errorMessage</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">start</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> rule <span class="keyword">of</span> <span class="built_in">this</span>.rules) &#123;</span><br><span class="line">      <span class="keyword">let</span> &#123; value, validateFunc, errorMessage &#125; = rule;</span><br><span class="line">      <span class="keyword">if</span> (!validateFunc(value)) &#123;</span><br><span class="line">        <span class="keyword">return</span> errorMessage;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 验证通过。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="最后还需要一个规则对象-策略对象"><a href="#最后还需要一个规则对象-策略对象" class="headerlink" title="最后还需要一个规则对象(策略对象)"></a>最后还需要一个规则对象(策略对象)</h3><p>细心的读者会发现，在<code>validate</code>函数中用了三个变量,<code>longerThan6</code>, <code>isPhone</code>和<code>notEmpty</code>。他们其实都是函数，用于被调用来验证值的正确性嘛。</p>
+<p>为了可复用，我们要将一些常见的验证规则保存起来：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Rules = &#123;</span><br><span class="line">  longerThan6: <span class="function"><span class="params">val</span> =&gt;</span> val &amp;&amp; val.length &gt;= <span class="number">6</span>,</span><br><span class="line">  isPhone: <span class="function"><span class="params">val</span> =&gt;</span> val &amp;&amp; <span class="regexp">/(^1[3|5|8][0-9]&#123;9&#125;$)/</span>.test(val),</span><br><span class="line">  notEmpty: <span class="function"><span class="params">val</span> =&gt;</span> val &amp;&amp; val.length != <span class="number">0</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>要使用的时候:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123;longerThan6, isPhone, notEmpty&#125; = Rules;</span><br></pre></td></tr></table></figure>
+
+<p>解构语法真是好用啊我的老天鹅。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><p><a target="_blank" rel="noopener" href="https://codepen.io/caren11/pen/rqQbZB?editors=1111">Codepen</a></p>
+<h1 id="解析策略模式"><a href="#解析策略模式" class="headerlink" title="解析策略模式"></a>解析策略模式</h1><p>策略模式的定义是：<strong>定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换。</strong></p>
+<p>前文提及，在传统面向对象语言中，一个基于策略模式的程序至少由两部分组成:</p>
+<ol>
+<li><strong>一组策略类</strong>: 策略类封装了具体的算法，并负责具体的计算过程。</li>
+<li><strong>一个环境类</strong> Context: Context 接受用户的请求，随后把请求委托给一个策略类。</li>
+</ol>
+<p>而在美丽的 JavaScript 中，一组策略类完全可以使用一个<strong>策略对象</strong>代替。这个策略对象的 key 是各个策略名称， value 是对应策略的具体算法。</p>
+<p>如第一个计算工资例子中的:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Strategies = &#123;</span><br><span class="line">  <span class="string">&quot;S&quot;</span>: <span class="function"><span class="params">salary</span>=&gt;</span> salary * <span class="number">4</span>,</span><br><span class="line">  <span class="string">&quot;A&quot;</span>: <span class="function"><span class="params">salary</span>=&gt;</span> salary * <span class="number">3</span>,</span><br><span class="line">  <span class="string">&quot;B&quot;</span>: <span class="function"><span class="params">salary</span>=&gt;</span> salary * <span class="number">2</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以及第二个表单校验例子中的:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Rules = &#123;****</span><br><span class="line">  longerThan6: <span class="function"><span class="params">val</span> =&gt;</span> val &amp;&amp; val.length &gt;= <span class="number">6</span>,</span><br><span class="line">  isPhone: <span class="function"><span class="params">val</span> =&gt;</span> val &amp;&amp; <span class="regexp">/(^1[3|5|8][0-9]&#123;9&#125;$)/</span>.test(val),</span><br><span class="line">  notEmpty: <span class="function"><span class="params">val</span> =&gt;</span> val &amp;&amp; val.length != <span class="number">0</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>那么<strong>环境类</strong>呢？其实在 JavaScript 中，随便写一个函数就可以了。</p>
+<p>简而言之，我靠..写到最后发现 JavaScript 中根本没有策略模式。基本上只要你熟悉了通过一个对象的方式来避免某些情况下的多个<code>if</code>，你就算是掌握了策略模式了。既然如此，我就不赘述策略模式的优点了，大体是避免了多个<code>if</code>、方便策略函数的重用等等。</p>
+<p>顺便看了一下原书，原来作者在末尾也说了这一点:</p>
+<blockquote>
+<p>在函数作为一等对象的语言中，策略模式是隐形的。strategy就是值作为函数的变量。</p>
+</blockquote>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://laijiawen.com">Jiawen Lai</a>
+            <p>原文链接：<a href="http://laijiawen.com/posts/strategy-pattern-and-its-application/">http://laijiawen.com/posts/strategy-pattern-and-its-application/</a>
+            <p>发表日期：<a href="http://laijiawen.com/posts/strategy-pattern-and-its-application/">October 25th 2018, 9:56:08 am</a>
+            <p>更新日期：<a href="http://laijiawen.com/posts/strategy-pattern-and-its-application/">November 10th 2020, 2:01:37 am</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/posts/proxy-pattern-and-its-application/" title= "代理模式- JavaScript 设计模式(二)">
+                    <div class="nextTitle">代理模式- JavaScript 设计模式(二)</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/posts/a-collapsing-border-bug-in-chrome/" title= "Chrome 中 table 布局的的重叠边框 bug">
+                    <div class="prevTitle">Chrome 中 table 布局的的重叠边框 bug</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "http://laijiawen.com/posts/strategy-pattern-and-its-application/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "策略模式- JavaScript 设计模式(一)"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://jiawen-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:fantastic@laijiawen.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/theJiawen" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://twitter.com/profileCaren" class="iconfont-archer twitter" target="_blank" title=twitter></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://juejin.im/user/58ae53965c497d006770691d" class="iconfont-archer juejin" target="_blank" title=juejin></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E2%80%9C%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%B3%BB%E5%88%97%E2%80%9C%E7%AC%AC%E4%B8%80%E7%AF%87%E7%9A%84%E5%BC%80%E5%A4%B4"><span class="toc-number">1.</span> <span class="toc-text">写在“设计模式系列“第一篇的开头</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901%EF%BC%9A%E8%AE%A1%E7%AE%97%E5%B9%B4%E7%BB%88%E5%A5%96"><span class="toc-number">2.</span> <span class="toc-text">例子1：计算年终奖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%89%88%E6%9C%AC"><span class="toc-number">2.1.</span> <span class="toc-text">初级工程师版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%89%88%E6%9C%AC-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">中级工程师版本(策略模式)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E7%9A%84tips"><span class="toc-number">2.3.</span> <span class="toc-text">额外的tips</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902%EF%BC%9A%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text">例子2：表单校验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84%E6%80%9D%E7%BB%B4%E5%86%99%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">常规思维写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%86%99%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">策略模式写法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">3.2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Validator%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.2.2.</span> <span class="toc-text">Validator类的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E8%BF%98%E9%9C%80%E8%A6%81%E4%B8%80%E4%B8%AA%E8%A7%84%E5%88%99%E5%AF%B9%E8%B1%A1-%E7%AD%96%E7%95%A5%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.2.3.</span> <span class="toc-text">最后还需要一个规则对象(策略对象)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="toc-number">3.2.4.</span> <span class="toc-text">完整代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">解析策略模式</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 9
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/20</span><a class="archive-post-title" href= "/posts/implement-new-indentifier-of-javascript/" >如何实现 JavaScript 的 new 运算符</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href= "/posts/what-was-I-thinking-when-I-was-pulled-out-ouf-my-teeth/" >当我拔牙的时候我在想什么</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/02</span><a class="archive-post-title" href= "/posts/Extract-from-the-interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit/" >对 Gmail 创始人 Paul Buchheit 的访谈摘录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/posts/proxy-pattern-and-its-application/" >代理模式- JavaScript 设计模式(二)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/posts/strategy-pattern-and-its-application/" >策略模式- JavaScript 设计模式(一)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/posts/a-collapsing-border-bug-in-chrome/" >Chrome 中 table 布局的的重叠边框 bug</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/posts/how-to-break-though-the-constraints-of-environment/" >如何突破环境对人的制约</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/25</span><a class="archive-post-title" href= "/posts/how-to-grow-confidience/" >如何培养自信</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/posts/how-to-avoid-being-brainwashed-part-1/" >如何避免被洗脑(上)</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="网络内容摘录"><span class="iconfont-archer">&#xe606;</span>网络内容摘录</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bug"><span class="iconfont-archer">&#xe606;</span>Bug</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="心理学"><span class="iconfont-archer">&#xe606;</span>心理学</span>
+    
+        <span class="sidebar-tag-name" data-tags="读书笔记"><span class="iconfont-archer">&#xe606;</span>读书笔记</span>
+    
+        <span class="sidebar-tag-name" data-tags="思考"><span class="iconfont-archer">&#xe606;</span>思考</span>
+    
+        <span class="sidebar-tag-name" data-tags="JavaScript"><span class="iconfont-archer">&#xe606;</span>JavaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
+    
+        <span class="sidebar-tag-name" data-tags="JavaScript设计模式"><span class="iconfont-archer">&#xe606;</span>JavaScript设计模式</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Caren-how"><span class="iconfont-archer">&#xe60a;</span>Caren-how</span>
+    
+        <span class="sidebar-category-name" data-categories="JavaScript-设计模式"><span class="iconfont-archer">&#xe60a;</span>JavaScript-设计模式</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Jiawen Lai"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

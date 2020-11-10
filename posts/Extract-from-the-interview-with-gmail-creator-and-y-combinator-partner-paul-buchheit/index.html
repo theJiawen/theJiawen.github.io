@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Jiawen Lai">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Jiawen Lai">
+    
+    <meta name="keywords" content="赖嘉文,Caren Lai,Jiawen Lai">
+    
+    <meta name="description" content="A Software Engineer's Blog">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>对 Gmail 创始人 Paul Buchheit 的访谈摘录 · 赖嘉文的个人网站 - Jiawen Lai&#39;s personal Website</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon2.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?612abc19987eb353274e306514a41f30";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+    <!-- 谷歌统计  -->
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-125674942-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Jiawen Lai</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">对 Gmail 创始人 Paul Buchheit 的访谈摘录</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Jiawen Lai</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/1266x477/daily?technology)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            对 Gmail 创始人 Paul Buchheit 的访谈摘录
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "网络内容摘录">网络内容摘录</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.4k</span>阅读时长: <span class="post-count reading-time">12 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/11/02</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>TripleByte 对 Gmail 创始人 Paul Buchheit 的进行了一个访谈，访谈内容很不错，我看完原文后获益匪浅，故在此做摘录以作备忘。</p>
+<h1 id="关于成为一名程序员"><a href="#关于成为一名程序员" class="headerlink" title="关于成为一名程序员"></a>关于成为一名程序员</h1><p><strong>1. How did you start programming?</strong></p>
+<p>One moment I remember really getting into programming came while playing a fantasy RPG video game. I got stuck and couldn’t find the magic handcuffs—or whatever it was—that I needed. Then I thought, “maybe instead of searching in the game, I can just hack the data file where it saves the inventory!” I started writing programs to figure out how the game was storing things. Then I figured out how to insert anything into my inventory, including things that didn’t even exist in the game.</p>
+<p>That’s when I realized wow, this is way more fun than the actual game. With games you’re just trapped inside someone else’s world. But with programming, you can do anything you want to the world, right? It’s an open environment, and there’s no limit to what you can do. <strong>From then on, video games just seemed like a pointless waste of time compared to programming.</strong></p>
+<p><em>大神之所以成为大神，是因为他们兴趣于此，而不是因为他们有多努力。</em></p>
+<h1 id="关于加入-Google-以及创造-Gamil"><a href="#关于加入-Google-以及创造-Gamil" class="headerlink" title="关于加入 Google 以及创造 Gamil"></a>关于加入 Google 以及创造 Gamil</h1><p><strong>1. Why did you decide to leave Intel?</strong></p>
+<p>Overall, the job wasn’t exciting to me. I didn’t have to work that hard, and one day I had this realization while sitting in my gray cubicle (I was in a sea of gray cubicles surrounded by gray walls, listening to white noise and all alone): I’m like, “Man I am so tired. I need to go home and take a nap.” I went home, but as soon as I got there I realized, “I’m not tired anymore.” Working at Intel was a draining environment, and I knew I wanted to leave.</p>
+<p><em>大神就是任性啊，一瞬间的疲累就让他想要辞职了，都不愁吃喝不愁房贷的。</em></p>
+<p><strong>2. How did you manage your personal career progression at Google?</strong></p>
+<p>I’ve never really been into the whole “career” thing. It just feels horribly big-company. I was always very allergic to things that I perceived as big company. I just didn’t want to be tucked away in a corner working on something irrelevant. I interned at Microsoft after my freshman year of college. On my last day, one of the smartest engineers in my group gave me this piece of advice, “<strong>Make sure they don’t stick you off in a corner working on something unimportant.</strong>” I’ve always remembered it as good advice. My ambition at Google was just to launch a cool product or create something important.</p>
+<p><em>大神从来不做职业规划，随心而行，牛逼。</em><br><em>那个微软的大神的话也值得一提：（当你在大公司工作的时候）Make sure they don’t stick you off in a corner working on something unimportant.</em></p>
+<h1 id="关于如何成为一个伟大的工程师"><a href="#关于如何成为一个伟大的工程师" class="headerlink" title="关于如何成为一个伟大的工程师"></a>关于如何成为一个伟大的工程师</h1><p><strong>1. What skills and knowledge does it take to be a good engineer?</strong></p>
+<p>Computer science is almost unlike any other engineering discipline because we routinely work at many different layers of abstraction. Someone who is only able to operate at one level is not going to be effective because often any given problem will be at a different level of abstraction from the last. Great engineers understand computers all the way from the silicon up through the different layers and protocols and systems.</p>
+<p><em>确实，要解决一个复杂问题，可能要面对多个抽象层，我们光会点 JS/CSS 实在是太局限了。要对一些计算机的底层原理有更细致的了解才行，于前端工程师而言，则 HTTP 是必须要精通的。这个话题从更大的角度来说，就是不要将自己局限于前端工程师这个 title，而要将自己想象成解决问题的工程师。这也是我前段时间才领悟到的一句话，改日再写一篇文章仔细论述。</em></p>
+<p><strong>2. How do you become a better engineer?</strong></p>
+<p>Doing it. Showing up seems to be the secret to getting good at most things. I programmed when I was in high school, and it was all I did because I didn’t have anything else going on—fortunately. Programming was my hobby, and I always had some project I was trying to implement. I think there’s no substitute for doing a lot of programming because you just can’t get really good in a short amount of time. It certainly took me years before I would say I was any good.</p>
+<p><em>兴趣啊兴趣啊，其实每个工程师都会有一点自己的小 ideas 想要做的吧。有没有执行力去完成它则是另一回事。</em></p>
+<p><strong>3. Who are some of the best engineers you’ve worked with? What made them great?</strong></p>
+<p>One of the most impressive engineers I ever worked with is Bret Taylor who was also my co-founder at FriendFeed. I’ve never encountered anyone else who combines being an incredible engineer, and being an incredible product person, and an incredible manager, and an incredible designer. He is good at everything—it’s unfair!</p>
+<p>The story about Bret I most vividly remember is from our days at Google. He wasn’t even an engineer there, instead he was a product manager for some reason. As the PM on Google Maps, he was frustrated that the JavaScript was really slow. It would take forever to load. <strong>So, one weekend he said, “I’m going to rewrite it”. And he rewrote the entire thing, making it 10 times as fast and a third of the size.</strong> He completely threw away the code that a team of engineers had been working on for months. Someone who can do that is ridiculous. Talk about 10x engineers. That’s more like 1000x. And it’s good, clean code too. Literally no number of median engineers can do that. You can give me a million median engineers and they would never be able to do that. They would just make a huge mess.</p>
+<p>Craig Silverstein was another, he was the very first Google employee. He is someone who types and programs faster than I can perceive what he’s doing. Sometimes I like to watch other engineers work so I can learn how they do things. But with Craig he moved too fast for that. The screen would flicker and code would just appear. He’d constantly be flipping buffers in Emacs or whatever. He types so fast. I’ve never seen anyone else that fast.</p>
+<p><em>Bret Taylor 一个人重写了一整个工程师队伍写了数月的 Google Maps, 并提升了接近十倍的速度，减少了三分之二的文件大小。一个字，强。Google 了一下他，发现他后来成了 Facebook 的 CTO. 牛逼。</em></p>
+<h1 id="关于离开谷歌并加入一个创业公司"><a href="#关于离开谷歌并加入一个创业公司" class="headerlink" title="关于离开谷歌并加入一个创业公司"></a>关于离开谷歌并加入一个创业公司</h1><p><strong>1. If the hours and the pay are worse, what are the benefits of working at a startup?</strong></p>
+<p>A big company, like Google is today, has all these really smart people who are already experienced and know what they’re doing. So, if you join Google, you’re going to be working at your “correct” level. At a startup, though, they probably don’t have the resources they need, so you can be operating way beyond your level. That’s what I think is really great about startups.</p>
+<p>Gmail is an example of this. I was 24 years old at the time, and I’d never completed a project of that scale or built anything like that before. Google today would never give that project to a relatively inexperienced 24 year old. But at a startup you can end up getting a project that a more mature company would give to a more experienced engineer.</p>
+<p><em>这里说的是在小公司工作的好处，大公司有大量的牛人，所以你去到那只会做你这个 level 做的事情，比如做个小前端。但是创业公司不同，你可能会接触到各个层次 level 的东西。Paul 说他当年做 Gmail 的时候只有 24 岁而已，现在哪个大公司会让一个 24 的小毛孩写这么大一个项目？ 我自己也有亲身的体会，在创业公司很重要的一点是不要把自己看成一个细分领域的工程师，比如 ios 工程师、Java 工程师或者前端工程师。你可能要解决各种不同层次的问题。虽然作为一个前端入职，我也曾经帮公司配置过 Amazon 云服务，包括 Amazon S3 的云存储、 Amazon Lambda Function 做的一些图片压缩以及一些权限设置。在一开始确实会觉得，WTF，我是来做前端的，这应该是一个后端的工作。但其实你老大不 care，他是要你来解决问题的. You are not a front-end engineer to me. More importantly you are an engineer that solved the problems.</em></p>
+<p><strong>2. Today, the big technology companies are paying engineers a lot more money than Intel was when you left for Google. How should that fact affect an engineer’s decision to join a startup?</strong></p>
+<p>Yeah, that’s hard. I think you have to view it as an investment. You’re essentially investing in yourself. You have to believe that at the startup, you’re going to learn and develop faster. If you don’t think it will provide that, maybe you shouldn’t take the job. If you go someplace with a lot of really smart people who are moving really fast, you can grow and develop as an engineer, or whatever you want to be, much faster than you would at a big company.</p>
+<p>I would suggest thinking about joining a startup as more like going to grad school to learn. Optimize around learning when choosing a job. That’s the best thing. Then if a startup fails, you can always go back to Google and probably get paid a lot more, because now you’re actually a much better engineer than you would have been if you had stayed there like everyone else.</p>
+<p><em>Paul 说在创业公司能学到更多东西，成长的更快。我并不赞同。一般而言创业公司没有大牛，无法给予你指导作用。他还建议，把加入一个创业公司看成是一个 grad school 来学习。我认为这恰好相反，大公司才能被当成是 grad school.</em></p>
+<p><strong>3. Generally, when you are interviewing with a startup, how should you decide if it is the right company for you?</strong></p>
+<p>Looking back, one of the things that really impressed me about Google, which is probably good advice for anyone choosing a startup to work at, was that the interviewers all asked really smart questions. <strong>They asked things that only people who really knew their stuff could have answered well</strong>. Urs asked me, “Let’s say you have a server, and it’s running really slowly for some reason, how do you diagnose the cause?” To answer that question, you actually have to understand systems really well.</p>
+<p>Their questions required being able to think at all these different levels: “Is there something going on in the kernel? Do you understand that hard drives are not these magical things which spit out information? Do you know why random access takes time?”</p>
+<p><strong>I only interviewed at one other company and they asked stupid questions like, “name the seven layers of the OSI Networking Stack,” or something that you’d pull out of a textbook, not things that were actually interesting.</strong> <em>(滑稽)</em></p>
+<p>Also, when I first went to work at Google, I had the opposite feeling I described having at Intel. I was excited. I woke up in the morning and was excited to go to work. There was this buzz of productivity in the office all the time. <strong>I think that’s one way to know if a startup is doing well: When you go into their office, you can just tell. Are people busy working, or are they sitting around on Twitter wasting time?</strong> Are people showing up because they have to, or are they eagerly working because they’re excited? Google was a really energizing place to be back then.</p>
+<h1 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a>原文地址</h1><p><a target="_blank" rel="noopener" href="https://triplebyte.com/blog/interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit">Gmail Creator and YC Partner Paul Buchheit on Joining Google, How to Become a Great Engineer and Happiness</a></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://laijiawen.com">Jiawen Lai</a>
+            <p>原文链接：<a href="http://laijiawen.com/posts/Extract-from-the-interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit/">http://laijiawen.com/posts/Extract-from-the-interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit/</a>
+            <p>发表日期：<a href="http://laijiawen.com/posts/Extract-from-the-interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit/">November 2nd 2018, 10:57:44 am</a>
+            <p>更新日期：<a href="http://laijiawen.com/posts/Extract-from-the-interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit/">November 2nd 2018, 10:57:44 am</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/posts/what-was-I-thinking-when-I-was-pulled-out-ouf-my-teeth/" title= "当我拔牙的时候我在想什么">
+                    <div class="nextTitle">当我拔牙的时候我在想什么</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/posts/proxy-pattern-and-its-application/" title= "代理模式- JavaScript 设计模式(二)">
+                    <div class="prevTitle">代理模式- JavaScript 设计模式(二)</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        
+        var disqus_config = function () {
+        this.page.url = "http://laijiawen.com/posts/Extract-from-the-interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "对 Gmail 创始人 Paul Buchheit 的访谈摘录"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://jiawen-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:fantastic@laijiawen.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/theJiawen" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://twitter.com/profileCaren" class="iconfont-archer twitter" target="_blank" title=twitter></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://juejin.im/user/58ae53965c497d006770691d" class="iconfont-archer juejin" target="_blank" title=juejin></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%88%90%E4%B8%BA%E4%B8%80%E5%90%8D%E7%A8%8B%E5%BA%8F%E5%91%98"><span class="toc-number">2.</span> <span class="toc-text">关于成为一名程序员</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8A%A0%E5%85%A5-Google-%E4%BB%A5%E5%8F%8A%E5%88%9B%E9%80%A0-Gamil"><span class="toc-number">3.</span> <span class="toc-text">关于加入 Google 以及创造 Gamil</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E4%B8%80%E4%B8%AA%E4%BC%9F%E5%A4%A7%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B8%88"><span class="toc-number">4.</span> <span class="toc-text">关于如何成为一个伟大的工程师</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%A6%BB%E5%BC%80%E8%B0%B7%E6%AD%8C%E5%B9%B6%E5%8A%A0%E5%85%A5%E4%B8%80%E4%B8%AA%E5%88%9B%E4%B8%9A%E5%85%AC%E5%8F%B8"><span class="toc-number">5.</span> <span class="toc-text">关于离开谷歌并加入一个创业公司</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E6%96%87%E5%9C%B0%E5%9D%80"><span class="toc-number">6.</span> <span class="toc-text">原文地址</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 9
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/20</span><a class="archive-post-title" href= "/posts/implement-new-indentifier-of-javascript/" >如何实现 JavaScript 的 new 运算符</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href= "/posts/what-was-I-thinking-when-I-was-pulled-out-ouf-my-teeth/" >当我拔牙的时候我在想什么</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/02</span><a class="archive-post-title" href= "/posts/Extract-from-the-interview-with-gmail-creator-and-y-combinator-partner-paul-buchheit/" >对 Gmail 创始人 Paul Buchheit 的访谈摘录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/posts/proxy-pattern-and-its-application/" >代理模式- JavaScript 设计模式(二)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/posts/strategy-pattern-and-its-application/" >策略模式- JavaScript 设计模式(一)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/posts/a-collapsing-border-bug-in-chrome/" >Chrome 中 table 布局的的重叠边框 bug</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/posts/how-to-break-though-the-constraints-of-environment/" >如何突破环境对人的制约</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/25</span><a class="archive-post-title" href= "/posts/how-to-grow-confidience/" >如何培养自信</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/posts/how-to-avoid-being-brainwashed-part-1/" >如何避免被洗脑(上)</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="网络内容摘录"><span class="iconfont-archer">&#xe606;</span>网络内容摘录</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bug"><span class="iconfont-archer">&#xe606;</span>Bug</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="心理学"><span class="iconfont-archer">&#xe606;</span>心理学</span>
+    
+        <span class="sidebar-tag-name" data-tags="读书笔记"><span class="iconfont-archer">&#xe606;</span>读书笔记</span>
+    
+        <span class="sidebar-tag-name" data-tags="思考"><span class="iconfont-archer">&#xe606;</span>思考</span>
+    
+        <span class="sidebar-tag-name" data-tags="JavaScript"><span class="iconfont-archer">&#xe606;</span>JavaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
+    
+        <span class="sidebar-tag-name" data-tags="JavaScript设计模式"><span class="iconfont-archer">&#xe606;</span>JavaScript设计模式</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Caren-how"><span class="iconfont-archer">&#xe60a;</span>Caren-how</span>
+    
+        <span class="sidebar-category-name" data-categories="JavaScript-设计模式"><span class="iconfont-archer">&#xe60a;</span>JavaScript-设计模式</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Jiawen Lai"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
